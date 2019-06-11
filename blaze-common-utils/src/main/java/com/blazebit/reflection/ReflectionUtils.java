@@ -169,12 +169,9 @@ public final class ReflectionUtils {
             }
             for (Class<?> interfaceClass : traverseClass.getInterfaces()) {
                 if (isSubtype(interfaceClass, commonSuperType)) {
-                    superTypes.add(interfaceClass);
-                }
-            }
-            for (Class<?> interfaceClass : traverseClass.getInterfaces()) {
-                if (isSubtype(interfaceClass, commonSuperType)) {
-                    addSuperTypes(superTypes, interfaceClass, commonSuperType);
+                    if (superTypes.add(interfaceClass)) {
+                        addSuperTypes(superTypes, interfaceClass, commonSuperType);
+                    }
                 }
             }
             traverseClass = traverseClass.getSuperclass();
